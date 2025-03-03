@@ -1,0 +1,1 @@
+# This is for a school project. A wellness project with a conflict resolutioner that helps students with personal and school issues. There are interactive options with guidance on how to maintain wellness.
