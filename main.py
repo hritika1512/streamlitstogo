@@ -421,6 +421,7 @@ def mandela_component(color, brush_size, symmetry_lines):
     components.html(html_string, height=550)
 
 st.title("Mandala Drawing App")
+st.write("Unleash your creativity and find your focus with our Mandala Colouring Feature! Colouring intricate mandala patterns is a proven way to relax, de-stress, and enhance your mindfulness. Lose yourself in the soothing process of bringing these beautiful designs to life, and experience the calming benefits for yourself.")
 
 color = st.color_picker("Choose Color", "#000000")
 brush_size = st.slider("Brush Size", 1, 10, 2)
