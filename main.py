@@ -317,11 +317,11 @@ def mandela_component(color, brush_size, symmetry_lines):
         <style>
             #container {{
                 background-color: white;
-                width: 500px;
-                height: 500px;
+                width: 700px;
+                height: 700px;
             }}
             canvas {{
-                border: 1px solid black;
+                border: 4px solid black;
             }}
         </style>
     </head>
@@ -331,8 +331,8 @@ def mandela_component(color, brush_size, symmetry_lines):
         <script>
             const stage = new Konva.Stage({{
                 container: 'container',
-                width: 500,
-                height: 500,
+                width: 700,
+                height: 700,
             }});
             const layer = new Konva.Layer();
             stage.add(layer);
