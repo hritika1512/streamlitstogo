@@ -4,4 +4,3 @@ python-dotenv
 scikit-learn
 transformers
 vaderSentiment
-konva
