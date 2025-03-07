@@ -308,6 +308,7 @@ if st.button("Get Advice"):
         st.write("No advice available for the provided scenario.")
 
 def mandela_component(color, brush_size, symmetry_lines):
+    print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}") #debugging print statement.
     html_string = f"""
     <!DOCTYPE html>
     <html>
