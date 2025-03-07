@@ -2,6 +2,7 @@ import streamlit as st
 import random
 import os
 import requests
+import streamlit.components.v1 as components
 from transformers import pipeline
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from sklearn.feature_extraction.text import TfidfVectorizer
