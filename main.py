@@ -144,14 +144,14 @@ if st.button("Analyze My Mood 🔍"):
                 "Negative": neg,
             }
 
-            st.subheader("Sentiment Analysis Breakdown 📊")
+            st.subheader("Mood Analysis Breakdown 📊")
             st.bar_chart(sentiment_data)
 
         except Exception as e:
             st.error(f"Unexpected Error: {e}")
             st.write(f"Error details: {e}")
     else:
-        st.write("Please share your experience to analyze its sentiment. 📖")
+        st.write("Please share your mood to analyze its sentiment. 📖")
 
 def mindfulness_section():
     st.subheader("Mindfulness Exercises 🧘")
@@ -169,6 +169,9 @@ def journaling_section():
     st.markdown("- What **challenges** did you face, and how did you **overcome** them? 💪")
     st.markdown("- What are your **goals** for the week? 🎯")
     st.image("boy.png", caption="Acheiving Goals", width=200)
+def positive_section():
+    st.subheader("Positive Affirmations ❤️")
+    set.write("")
 
 
 mindfulness_section()
