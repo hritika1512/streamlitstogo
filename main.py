@@ -106,10 +106,10 @@ for task, completed in st.session_state.completed_tasks.items():
 
 st.write("----------------------------------------------")
 
-st.write("Share Your Kindness Story 📖: *Tell us about a time when you showed kindness, received kindness, or witnessed kindness in action.  Your story can inspire others, spread positivity, and remind us of the power of compassion.  Submit your story and let's create a ripple effect of kindness together!*")
+st.write("Mood Detector")
 experience = st.text_area("")
 
-if st.button("Analyze My Story 🔍"):
+if st.button("Analyze My Mood 🔍"):
     if experience:
         try:
             scores = analyzer.polarity_scores(experience)
@@ -121,22 +121,20 @@ if st.button("Analyze My Story 🔍"):
             tips = []
             if compound >= 0.5:
                 emotion = "joyful"
-                tips = ["Celebrate your positive experience! 🎉", "Consider sharing your story with others. 😊"]
+                tips = ["You seem to be feeling joyous! Your mood can radiate and affect others too, so keep that positive energy up! ⭐"]
             elif compound <= -0.5:
-                emotion = "distressed"
-                tips = ["Allow yourself to feel your emotions. 😔", "Reach out to someone you trust for support. 📞"]
+                emotion = "sad"
+                tips = ["I'm sensing sadness. Try some mandala art, or a few positive affirmations. Perhaps listen to calming nature sounds on YouTube. 🌿"]
             elif neg > 0.3 and neu > 0.5:
-                emotion = "anxious"
-                tips = ["Practice deep breathing to calm your nerves. 🌬️",
-                        "Try a grounding technique to bring yourself to the present. 🦶"]
+                emotion = "angry"
+                tips = ["It sounds like you're angry. Use our conflict resolution tool, or try a mindfulness exercise. Consider a short, brisk walk outside. 🚶"]
             elif neu > 0.7 and pos < 0.2 and neg < 0.2:
-                emotion = "unchallenged"
-                tips = ["Find a new activity to stimulate your mind. 🧩", "Engage in a creative outlet to express yourself. 🎨"]
+                emotion = "scared"
+                tips = ["I sense fear. Practice a grounding mindfulness exercise, or explore some positive affirmations. Maybe try a guided relaxation video online."]
             else:
                 emotion = "contemplative"
-                tips = ["Take a moment to reflect on your experience. 🤔",
-                        "Consider how you can apply this experience to your life. 🌱"]
-            st.write(f"Based on your story, you seem to be feeling {emotion}. 😌")
+                tips = ["In a contemplative mood? Engage with a journaling prompt, or explore our mandala art section. Consider reading a thought-provoking article."]
+            st.write(f"Based on your input, you seem to be feeling {emotion}. 😌")
             for tip in tips:
                 st.write(f"- {tip}")
 
