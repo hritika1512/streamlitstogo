@@ -106,7 +106,7 @@ for task, completed in st.session_state.completed_tasks.items():
 
 st.write("----------------------------------------------")
 
-st.write("Mood Detector")
+st.write("**Mood Detector**: This tool analyzes your text to identify your mood and offers helpful suggestions for managing your emotions.")
 experience = st.text_area("")
 
 if st.button("Analyze My Mood 🔍"):
@@ -116,7 +116,6 @@ if st.button("Analyze My Mood 🔍"):
             compound = scores['compound']
             pos = scores['pos']
             neg = scores['neg']
-            neu = scores['neu']
             emotion = "neutral"
             tips = []
             if compound >= 0.5:
@@ -125,10 +124,10 @@ if st.button("Analyze My Mood 🔍"):
             elif compound <= -0.5:
                 emotion = "sad"
                 tips = ["I'm sensing sadness. Try some mandala art, or a few positive affirmations. Perhaps listen to calming nature sounds on YouTube. 🌿"]
-            elif neg > 0.3 and neu > 0.5:
+            elif neg > 0.3:
                 emotion = "angry"
                 tips = ["It sounds like you're angry. Use our conflict resolution tool, or try a mindfulness exercise. Consider a short, brisk walk outside. 🚶"]
-            elif neu > 0.7 and pos < 0.2 and neg < 0.2:
+            elif pos < 0.2 and neg < 0.2:
                 emotion = "scared"
                 tips = ["I sense fear. Practice a grounding mindfulness exercise, or explore some positive affirmations. Maybe try a guided relaxation video online."]
             else:
@@ -140,7 +139,6 @@ if st.button("Analyze My Mood 🔍"):
 
             sentiment_data = {
                 "Positive": pos,
-                "Neutral": neu,
                 "Negative": neg,
             }
 
