@@ -193,7 +193,7 @@ def journaling_section():
     st.markdown("What are your strengths and weaknesses?")
     st.markdown("How are you feeling right now, and why?")
     st.markdown("What are you holding onto that you need to let go of?")
-    st.markdown("What are your goals and dreams?
+    st.markdown("What are your goals and dreams?")
     st.markdown("What challenges are you facing, and how can you overcome them?")
     st.markdown("What small things bring you happiness?")
     st.markdown("How can you be more present in your daily life?")
