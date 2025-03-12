@@ -155,12 +155,12 @@ if st.button("Analyze My Mood 🔍"):
                 tips = ["It sounds like you're angry. Use our conflict resolution tool, or try a mindfulness exercise. Consider a short, brisk walk outside. 🚶"]
             elif pos < 0.2 and neg < 0.2 and compound < -0.2 and emotion == "contemplative":
                 emotion = "scared"
-                tips = ["I sense fear. Practice a grounding mindfulness exercise, or explore some positive affirmations. Maybe try a guided relaxation video online."]
+                tips = ["I sense fear. Practice a grounding mindfulness exercise, or explore some positive affirmations. Maybe try a guided relaxation video online. 🎥"]
             elif compound < -0.2 and neg > pos and emotion == "contemplative":
                 emotion = "unwell"
                 tips = ["It sounds like you're not feeling well. Try to get some rest, and drink plenty of water."]
 
-            st.write(f"Based on your input, you seem to be feeling {emotion}. 😌")
+            st.write(f"Based on your input, you seem to be feeling {emotion}.")
             for tip in tips:
                 st.write(f"- {tip}")
 
@@ -169,7 +169,6 @@ if st.button("Analyze My Mood 🔍"):
                 "Negative": neg,
                 "Compound": compound
             }
-            st.write(f"Sentiment Scores: {sentiment_data}")
             st.subheader("Mood Analysis Breakdown 📊")
             st.bar_chart(sentiment_data)
 
@@ -190,17 +189,32 @@ def mindfulness_section():
 def journaling_section():
     st.subheader("Journaling Prompts 📝")
     st.write("School got you stressed?  Take a moment for yourself with our curated journaling prompts. Reflect on your thoughts, feelings, and experiences with these thought-provoking questions. Journaling can help you gain clarity, reduce stress, and boost your well-being. Here are some thoughtful prompts to get you started:")
-    st.markdown("- What are you **grateful** for today? 🙏")
-    st.markdown("- What **challenges** did you face, and how did you **overcome** them? 💪")
-    st.markdown("- What are your **goals** for the week? 🎯")
+    st.markdown("What are you most grateful for today?")
+    st.markdown("What are your strengths and weaknesses?")
+    st.markdown("How are you feeling right now, and why?")
+    st.markdown("What are you holding onto that you need to let go of?")
+    st.markdown("What are your goals and dreams?
+    st.markdown("What challenges are you facing, and how can you overcome them?")
+    st.markdown("What small things bring you happiness?")
+    st.markdown("How can you be more present in your daily life?")
     st.image("boy.png", caption="Acheiving Goals", width=200)
+
 def positive_section():
     st.subheader("Positive Affirmations ❤️")
-    set.write("")
+    st.write("Need a boost of positivity? Our Positive Affirmations section is here to uplift and inspire you.  We've curated a collection of empowering statements to help you cultivate self-love, overcome challenges, and embrace your inner strength.  Read them daily, repeat them to yourself, and let these affirmations guide you towards a more positive and fulfilling mindset.")
+    st.markdown("I am capable of achieving my goals.")
+    st.markdown("I can handle any challenge that comes my way.")
+    st.markdown("I am a strong and intelligent student.")
+    st.markdown("I am focused and dedicated to my studies.")
+    st.markdown("I embrace challenges as opportunities to learn.")
+    st.markdown("I am kind and compassionate to myself.")
+    st.markdown("I nourish myself with healthy habits.")
+    st.image("girl.png", caption="Self Encouragement", width=200)
 
 
 mindfulness_section()
 journaling_section()
+positive_section()
 
 st.title("Conflict Resolutioner AI")
 st.write("Navigating work overload, procrastination, friendships, group projects, or misunderstandings with classmates? Our AI-powered conflict resolution assistant is here to help! Describe your situation, and our friendly AI will offer empathetic advice and practical strategies to help you resolve conflicts peacefully and maintain positive relationships.")
