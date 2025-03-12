@@ -165,17 +165,11 @@ if st.button("Analyze My Mood 🔍"):
                 "Compound": compound
             }
             st.write(f"Sentiment Scores: {sentiment_data}")
-
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
-    else:
-        st.write("Please enter some text to analyze.")
             st.subheader("Mood Analysis Breakdown 📊")
             st.bar_chart(sentiment_data)
 
         except Exception as e:
-            st.error(f"Unexpected Error: {e}")
-            st.write(f"Error details: {e}")
+            st.error(f"An error occurred: {e}")
     else:
         st.write("Please share your mood to analyze its sentiment. 📖")
 
