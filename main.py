@@ -35,7 +35,7 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-local_css("style.css")  # Make sure style.css exists
+local_css("style.css")
 
 analyzer = SentimentIntensityAnalyzer()
 
@@ -44,6 +44,7 @@ sad_keywords = ["sad", "unhappy", "depressed", "miserable", "heartbroken", "lone
 angry_keywords = ["angry", "furious", "irritated", "frustrated", "mad", "rage", "annoyed", "pissed"]
 scared_keywords = ["scared", "afraid", "nervous", "anxious", "terrified", "worried", "fear", "panic"]
 contemplative_keywords = ["thinking", "reflecting", "pondering", "considering", "wondering", "introspective", "meditative"]
+unwell_keywords = ["unwell", "sick", "ill", "poorly", "not feeling well", "discomfort"]
 
 challenges = {
     "Compliment a classmate.": "😊",
@@ -127,7 +128,6 @@ if st.button("Analyze My Mood 🔍"):
             emotion = "contemplative"
             tips = ["In a contemplative mood? Engage with a journaling prompt, or explore our mandala art section. Consider reading a thought-provoking article."]
 
-            # Keyword Checks (Prioritize these)
             if any(keyword in experience_lower for keyword in joyful_keywords):
                 emotion = "joyful"
                 tips = ["You seem to be feeling joyous! Your mood can radiate and affect others too, so keep that positive energy up! ⭐"]
@@ -140,8 +140,10 @@ if st.button("Analyze My Mood 🔍"):
             elif any(keyword in experience_lower for keyword in scared_keywords):
                 emotion = "scared"
                 tips = ["I sense fear. Practice a grounding mindfulness exercise, or explore some positive affirmations. Maybe try a guided relaxation video online."]
+            elif any(keyword in experience_lower for keyword in unwell_keywords):
+                emotion = "unwell"
+                tips = ["It sounds like you're not feeling well. Try to get some rest, and drink plenty of water."]
 
-            # VADER Score Checks (Fallback)
             elif compound >= 0.5 and emotion == "contemplative":
                 emotion = "joyful"
                 tips = ["You seem to be feeling joyous! Your mood can radiate and affect others too, so keep that positive energy up! ⭐"]
@@ -154,6 +156,9 @@ if st.button("Analyze My Mood 🔍"):
             elif pos < 0.2 and neg < 0.2 and compound < -0.2 and emotion == "contemplative":
                 emotion = "scared"
                 tips = ["I sense fear. Practice a grounding mindfulness exercise, or explore some positive affirmations. Maybe try a guided relaxation video online."]
+            elif compound < -0.2 and neg > pos and emotion == "contemplative":
+                emotion = "unwell"
+                tips = ["It sounds like you're not feeling well. Try to get some rest, and drink plenty of water."]
 
             st.write(f"Based on your input, you seem to be feeling {emotion}. 😌")
             for tip in tips:
@@ -287,49 +292,48 @@ conflict_tips = {
     ]
 }
 
-# Create the dropdown
 selected_scenario = st.selectbox("Select a conflict scenario:", conflict_scenarios, key="selectbox2")
 
-user_input = ""  # Initialize user_input
+user_input = "" 
 
 if selected_scenario == "Other":
     user_input = st.text_area("Describe your conflict:")
 else:
     user_input = selected_scenario
 
-matched_scenario = None  # Initialize matched_scenario
+matched_scenario = None 
 
 if selected_scenario == "Other" and user_input:
-    # Use TF-IDF to vectorize the scenarios and user input
-    vectorizer = TfidfVectorizer()
-    scenario_vectors = vectorizer.fit_transform(list(conflict_tips.keys()) + [user_input]) # Corrected: use conflict_tips.keys()
 
-    # Calculate cosine similarity
+    vectorizer = TfidfVectorizer()
+    scenario_vectors = vectorizer.fit_transform(list(conflict_tips.keys()) + [user_input])
+
+   
     similarity_scores = cosine_similarity(scenario_vectors[-1], scenario_vectors[:-1])[0]
 
-    # Find the closest scenario
-    closest_scenario_index = similarity_scores.argmax() # Corrected: use argmax() to find the index of the highest similarity
-    matched_scenario = list(conflict_tips.keys())[closest_scenario_index] # Corrected: use conflict_tips.keys()
+   
+    closest_scenario_index = similarity_scores.argmax() 
+    matched_scenario = list(conflict_tips.keys())[closest_scenario_index] 
 
-    # Keep the original user input, but use matched_scenario for API
+  
     scenario_for_api = matched_scenario
 
 if st.button("Get Advice"):
-    if selected_scenario != "Other": # if not other, use selected scenario.
+    if selected_scenario != "Other": 
         if selected_scenario in conflict_tips:
             st.write("**Advice:**")
             for tip in conflict_tips[selected_scenario]:
                 st.write(f"- {tip}")
-    elif matched_scenario: # if other, check if matching scenario exists
+    elif matched_scenario:
         for tip in conflict_tips[matched_scenario]:
             st.write(f"- {tip}")
-    elif selected_scenario == "Other" and not user_input: # if other, and no user input.
+    elif selected_scenario == "Other" and not user_input:
         st.write("Please provide a description of your conflict.")
     else:
         st.write("No advice available for the provided scenario.")
 
 def mandela_component(color, brush_size, symmetry_lines):
-    print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}") #debugging print statement.
+    print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
     html_string = f"""
     <!DOCTYPE html>
     <html>
