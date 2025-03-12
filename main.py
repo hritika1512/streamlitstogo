@@ -39,6 +39,12 @@ local_css("style.css")  # Make sure style.css exists
 
 analyzer = SentimentIntensityAnalyzer()
 
+joyful_keywords = ["happy", "excited", "joy", "delighted", "thrilled", "wonderful", "amazing", "fantastic"]
+sad_keywords = ["sad", "unhappy", "depressed", "miserable", "heartbroken", "lonely", "grief", "disappointed"]
+angry_keywords = ["angry", "furious", "irritated", "frustrated", "mad", "rage", "annoyed", "pissed"]
+scared_keywords = ["scared", "afraid", "nervous", "anxious", "terrified", "worried", "fear", "panic"]
+contemplative_keywords = ["thinking", "reflecting", "pondering", "considering", "wondering", "introspective", "meditative"]
+
 challenges = {
     "Compliment a classmate.": "😊",
     "Offer to help a friend with homework.": "🤝",
@@ -116,23 +122,39 @@ if st.button("Analyze My Mood 🔍"):
             compound = scores['compound']
             pos = scores['pos']
             neg = scores['neg']
-            emotion = "neutral"
-            tips = []
-            if compound >= 0.5:
+            experience_lower = experience.lower()
+
+            emotion = "contemplative"
+            tips = ["In a contemplative mood? Engage with a journaling prompt, or explore our mandala art section. Consider reading a thought-provoking article."]
+
+            # Keyword Checks (Prioritize these)
+            if any(keyword in experience_lower for keyword in joyful_keywords):
                 emotion = "joyful"
                 tips = ["You seem to be feeling joyous! Your mood can radiate and affect others too, so keep that positive energy up! ⭐"]
-            elif compound <= -0.5:
+            elif any(keyword in experience_lower for keyword in sad_keywords):
                 emotion = "sad"
                 tips = ["I'm sensing sadness. Try some mandala art, or a few positive affirmations. Perhaps listen to calming nature sounds on YouTube. 🌿"]
-            elif neg > 0.3:
+            elif any(keyword in experience_lower for keyword in angry_keywords):
                 emotion = "angry"
                 tips = ["It sounds like you're angry. Use our conflict resolution tool, or try a mindfulness exercise. Consider a short, brisk walk outside. 🚶"]
-            elif pos < 0.2 and neg < 0.2:
+            elif any(keyword in experience_lower for keyword in scared_keywords):
                 emotion = "scared"
                 tips = ["I sense fear. Practice a grounding mindfulness exercise, or explore some positive affirmations. Maybe try a guided relaxation video online."]
-            else:
-                emotion = "contemplative"
-                tips = ["In a contemplative mood? Engage with a journaling prompt, or explore our mandala art section. Consider reading a thought-provoking article."]
+
+            # VADER Score Checks (Fallback)
+            elif compound >= 0.5 and emotion == "contemplative":
+                emotion = "joyful"
+                tips = ["You seem to be feeling joyous! Your mood can radiate and affect others too, so keep that positive energy up! ⭐"]
+            elif compound <= -0.5 and emotion == "contemplative":
+                emotion = "sad"
+                tips = ["I'm sensing sadness. Try some mandala art, or a few positive affirmations. Perhaps listen to calming nature sounds on YouTube. 🌿"]
+            elif neg > 0.3 and emotion == "contemplative":
+                emotion = "angry"
+                tips = ["It sounds like you're angry. Use our conflict resolution tool, or try a mindfulness exercise. Consider a short, brisk walk outside. 🚶"]
+            elif pos < 0.2 and neg < 0.2 and compound < -0.2 and emotion == "contemplative":
+                emotion = "scared"
+                tips = ["I sense fear. Practice a grounding mindfulness exercise, or explore some positive affirmations. Maybe try a guided relaxation video online."]
+
             st.write(f"Based on your input, you seem to be feeling {emotion}. 😌")
             for tip in tips:
                 st.write(f"- {tip}")
@@ -140,8 +162,14 @@ if st.button("Analyze My Mood 🔍"):
             sentiment_data = {
                 "Positive": pos,
                 "Negative": neg,
+                "Compound": compound
             }
+            st.write(f"Sentiment Scores: {sentiment_data}")
 
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+    else:
+        st.write("Please enter some text to analyze.")
             st.subheader("Mood Analysis Breakdown 📊")
             st.bar_chart(sentiment_data)
 
