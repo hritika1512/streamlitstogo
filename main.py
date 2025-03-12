@@ -41,7 +41,7 @@ analyzer = SentimentIntensityAnalyzer()
 
 joyful_keywords = ["happy", "excited", "joy", "delighted", "thrilled", "wonderful", "amazing", "fantastic"]
 sad_keywords = ["sad", "unhappy", "depressed", "miserable", "heartbroken", "lonely", "grief", "disappointed"]
-angry_keywords = ["angry", "furious", "irritated", "frustrated", "mad", "rage", "annoyed", "pissed"]
+angry_keywords = ["angry", "furious", "irritated", "frustrated", "mad", "rage", "annoyed"]
 scared_keywords = ["scared", "afraid", "nervous", "anxious", "terrified", "worried", "fear", "panic"]
 contemplative_keywords = ["thinking", "reflecting", "pondering", "considering", "wondering", "introspective", "meditative"]
 unwell_keywords = ["unwell", "sick", "ill", "poorly", "not feeling well", "discomfort"]
