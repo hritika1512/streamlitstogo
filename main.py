@@ -209,7 +209,7 @@ def positive_section():
     st.markdown("I embrace challenges as opportunities to learn.")
     st.markdown("I am kind and compassionate to myself.")
     st.markdown("I nourish myself with healthy habits.")
-    st.image("girl.png", caption="Self Encouragement", width=200)
+    st.image("positive.png", caption="Self Encouragement", width=200)
 
 
 mindfulness_section()
