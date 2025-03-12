@@ -180,9 +180,11 @@ if st.button("Analyze My Mood 🔍"):
 def mindfulness_section():
     st.subheader("Mindfulness Exercises 🧘")
     st.write("Need a break from the studies and a moment of calm? Discover simple yet effective mindfulness techniques to bring peace and focus to your mind. From deep breathing exercises to mindful observation, these tips can help you manage stress, increase self-awareness, and improve your overall well-being. Useful exercises:")
-    st.markdown("- **Deep Breathing:** Find a quiet space, close your eyes, and focus on your breath. Inhale slowly,hold for a few seconds, and exhale slowly. 🌬️")
-    st.markdown("- **Body Scan:** Lie down or sit comfortably. Focus your attention on each part of your body, starting with your toes and moving up to your head. 🦶")
-    st.markdown("- **Mindful Observation:** Choose an object and observe it with all your senses. Notice its color, shape, texture, and any other details. 🔍")
+    st.markdown("* __Deep Breathing:__ Sit comfortably. Close your eyes. Inhale slowly through your nose, exhale through your mouth. Repeat for 5-10 minutes, focusing on your breath.")
+    st.markdown("* __Body Scan:__ Sit or lie down. Close your eyes. Bring your attention to your body, starting with your toes. Notice any sensations as you slowly move your attention up to your head.")
+    st.markdown("* __Mindful Walking:__ Walk slowly. Pay attention to the sensations of your feet on the ground and your body's movement. Engage your senses and observe your surroundings.")
+    st.markdown("* __Five Senses Meditation:__ Sit comfortably. Close your eyes. Take a few moments to notice what you experience through each of your five senses: sight, sound, smell, taste, and touch.")
+    st.markdown("* __Mindful Observation:__ Choose an object. Observe it closely with all your senses. Notice its colors, shapes, textures, and any sounds or smells.")
     st.image("girl.png", caption="Utilising Mindfulness", width=200)
 
 def journaling_section():
