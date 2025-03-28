@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /workspaces/streamlitstogo/
-git add --all
-git commit -m "autoCommit $(date +'%Y%m%d.%H%M%S')"
-git push
+/usr/bin/git add --all
+/usr/bin/git commit -m "autoCommit $(date +'%Y%m%d.%H%M%S')"
+/usr/bin/git push
 exit
