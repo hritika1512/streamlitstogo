@@ -72,7 +72,7 @@ challenges = {
     "Volunteer at a charity.": "🙋",
     "Help a pet owner.": "🐾",
     "Help a teacher after class.": "🍎",
-    "Be respectful to everyone.": " Respect",
+    "Be respectful to everyone.": " 🗣️",
     "Listen attentively.": "👂",
     "Practice gratitude.": "🙏",
     "Be kind to yourself.": "🧘",
