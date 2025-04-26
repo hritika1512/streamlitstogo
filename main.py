@@ -356,9 +356,6 @@ if st.button("Get Advice"):
     else:
         st.write("No advice available for the provided scenario.")
 
-import streamlit as st
-import streamlit.components.v1 as components
-
 def mandela_component(color, brush_size, symmetry_lines):
     print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
     html_string = f"""
