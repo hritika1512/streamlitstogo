@@ -365,12 +365,11 @@ def mandela_component(color, brush_size, symmetry_lines):
         <script src="https://unpkg.com/konva@8/konva.min.js"></script>
         <style>
             #container {{
-                background-color: white;
-                width: 500px; /* Set fixed width */
-                height: 500px; /* Set fixed height */
+                width: 500px !important;
+                height: 500px !important;
             }}
             canvas {{
-                border: 1px solid black;
+                border: 4px solid black !important;
             }}
         </style>
     </head>
@@ -380,8 +379,9 @@ def mandela_component(color, brush_size, symmetry_lines):
         <script>
             const stage = new Konva.Stage({{
                 container: 'container',
-                width: 500, // Set fixed width
-                height: 500, // Set fixed height
+                width: 500,
+                height: 500,
+                backgroundColor: 'white'
             }});
             const layer = new Konva.Layer();
             stage.add(layer);
@@ -391,6 +391,7 @@ def mandela_component(color, brush_size, symmetry_lines):
             let strokeWidth = {brush_size};
             let symmetryLines = {symmetry_lines};
             let lastDrawTime = 0;
+            let currentLine;
 
             stage.on('mousedown touchstart', (e) => {{
                 isDrawing = true;
