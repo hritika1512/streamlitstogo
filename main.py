@@ -18,7 +18,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.set_page_config(page_title="SynapseAI", page_icon="generated-icon.png", layout="wide")
+st.set_page_config(page_title="SynapseAI", page_icon="SYNAPSEAILOGO.png", layout="wide")
 
 API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN")
 API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-2-7b-chat-hf"
