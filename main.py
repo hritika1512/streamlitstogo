@@ -9,20 +9,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
 
-st.markdown(
-    """
-    <style>
-    body {
-        font-family: "Times New Roman", serif !important;
-    }
-    h1, h2, h3, p, div, span, a {
-        font-family: "Times New Roman", serif !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
 st.set_page_config(page_title="SynapseAI", page_icon="generated-icon.png", layout="wide")
 
 API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN")
