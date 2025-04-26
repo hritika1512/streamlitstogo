@@ -1,16 +1,18 @@
-/* .appview-container {
-  background: linear-gradient(to right, #bcd1fb, #716bc6); 
+.appview-container {
+  background: linear-gradient(to right, #bcd1fb, #3b6e91);
   color: #001f3f !important;
 }
+
 
 .my-element {
   border: 1px solid #000000;
   border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow */
 }
 
+
 .stButton>button {
-    background-color: #80a7f4; 
+    background-color: #80a7f4;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -20,15 +22,18 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
+
 
 .stButton>button:hover {
   background-color: #668ee8;
 }
 
-.stButton>button:hover span { 
-  color: black !important; 
-} */
+
+.stButton>button:hover span {
+  color: black !important;
+}
+
 
 
