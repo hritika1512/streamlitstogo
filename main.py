@@ -347,7 +347,7 @@ if st.button("Get Advice"):
     else:
         st.write("No advice available for the provided scenario.")
 
-def mandela_component(color, brush_size, symmetry_lines):
+def mandela_component(color, brush_size, symmetry_lines, existing_lines):
     print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
     html_string = f"""
     <!DOCTYPE html>
@@ -382,6 +382,15 @@ def mandela_component(color, brush_size, symmetry_lines):
             let strokeWidth = {brush_size};
             let symmetryLines = {symmetry_lines};
             let lastDrawTime = 0;
+            let currentLine;
+            let drawnLines = {existing_lines}; // Receive existing lines
+
+            // Redraw existing lines
+            drawnLines.forEach(lineData => {
+                const line = new Konva.Line(lineData);
+                layer.add(line);
+            });
+            layer.draw();
 
             stage.on('mousedown touchstart', (e) => {{
                 isDrawing = true;
@@ -392,7 +401,10 @@ def mandela_component(color, brush_size, symmetry_lines):
                     strokeWidth: strokeWidth,
                     lineCap: 'round',
                     lineJoin: 'round',
-                    name: 'userLine'
+                    name: 'userLine',
+                    // Store drawing parameters for saving
+                    stroke: strokeColor,
+                    strokeWidth: strokeWidth,
                 }});
                 layer.add(newLine);
                 currentLine = newLine;
@@ -439,10 +451,15 @@ def mandela_component(color, brush_size, symmetry_lines):
 
             stage.on('mouseup touchend', () => {{
                 isDrawing = false;
+                if (currentLine) {{
+                    // Store the drawn line data
+                    drawnLines.push(currentLine.toObject());
+                }}
             }});
 
             document.getElementById('clearButton').addEventListener('click', function() {{
                 layer.getChildren((node) => node.name() === 'userLine' || node.name() === 'symmetryLine').forEach((node) => node.destroy());
+                drawnLines = []; // Clear stored lines
                 layer.draw();
             }});
 
@@ -450,6 +467,12 @@ def mandela_component(color, brush_size, symmetry_lines):
                 if (event.data.type === 'color_update') {{
                     strokeColor = event.data.color;
                     console.log("Color updated to: ", strokeColor);
+                }} else if (event.data.type === 'brush_update') {{
+                    strokeWidth = event.data.brushSize;
+                    console.log("Brush size updated to: ", strokeWidth);
+                }} else if (event.data.type === 'symmetry_update') {{
+                    symmetryLines = event.data.symmetryLines;
+                    console.log("Symmetry lines updated to: ", symmetryLines);
                 }}
             }});
             console.log("Initial color: ", strokeColor);
@@ -463,11 +486,14 @@ def mandela_component(color, brush_size, symmetry_lines):
 st.title("Mandala Drawing App")
 st.write("Unleash your creativity and find your focus with our Mandala Colouring Feature! Colouring intricate mandala patterns is a proven way to relax, de-stress, and enhance your mindfulness. Lose yourself in the soothing process of bringing these beautiful designs to life, and experience the calming benefits for yourself.")
 
-color = st.color_picker("Choose Color", "#000000")
-brush_size = st.slider("Brush Size", 1, 10, 2)
-symmetry_lines = st.slider("Symmetry Lines", 2, 20, 8)
+if 'drawn_lines' not in st.session_state:
+    st.session_state['drawn_lines'] = []
 
-mandela_component(color, brush_size, symmetry_lines)
+color = st.color_picker("Choose Color", st.session_state.get('color', "#000000"))
+brush_size = st.slider("Brush Size", 1, 10, st.session_state.get('brush_size', 2))
+symmetry_lines = st.slider("Symmetry Lines", 2, 20, st.session_state.get('symmetry_lines', 8))
+
+mandela_component(color, brush_size, symmetry_lines, st.session_state['drawn_lines'])
 
 if st.session_state.get('color') != color:
     components.html(f"""
@@ -477,3 +503,21 @@ if st.session_state.get('color') != color:
     </script>
     """, height = 0)
     st.session_state['color'] = color
+
+if st.session_state.get('brush_size') != brush_size:
+    components.html(f"""
+    <script>
+        window.dispatchEvent(new MessageEvent('message', {{data: {{type: 'brush_update', brushSize: {brush_size}}}}}));
+        console.log("message dispatched to change brush size to: ", {brush_size});
+    </script>
+    """, height = 0)
+    st.session_state['brush_size'] = brush_size
+
+if st.session_state.get('symmetry_lines') != symmetry_lines:
+    components.html(f"""
+    <script>
+        window.dispatchEvent(new MessageEvent('message', {{data: {{type: 'symmetry_update', symmetryLines: {symmetry_lines}}}}}));
+        console.log("message dispatched to change symmetry lines to: ", {symmetry_lines});
+    </script>
+    """, height = 0)
+    st.session_state['symmetry_lines'] = symmetry_lines
