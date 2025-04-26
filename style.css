@@ -45,6 +45,10 @@ h3 {
     font-family: 'Comic Relief', cursive !important;
 }
 
+p {
+    font-family: 'Monaco', monospace !important;
+}
+
 .comic-text {
     font-family: 'Comic Relief', cursive !important;
 }
