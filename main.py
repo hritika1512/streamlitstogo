@@ -382,9 +382,10 @@ def mandela_component(color, brush_size, symmetry_lines):
                 width: 500,
                 height: 500,
                 backgroundColor: '#fefefe'
-                opacity: 1
             }});
             const layer = new Konva.Layer();
+            const konvaCanvas = stage.getCanvas()._canvas;
+            konvaCanvas.style.backgroundColor = '#fefefe';
             stage.add(layer);
             stage.draw();
 
