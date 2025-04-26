@@ -499,5 +499,3 @@ if st.session_state.get('color') != color:
     </script>
     """, height=0)
     st.session_state['color'] = color
-    """, height=0)
-    st.session_state['color'] = color
