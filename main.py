@@ -457,7 +457,7 @@ def mandela_component(color, brush_size, symmetry_lines):
     </body>
     </html>
     """
-    components.html(html_string, height=550)
+    components.html(html_string, height=550)
 
 st.title("Mandala Drawing App")
 st.write("Unleash your creativity and find your focus with our Mandala Colouring Feature! Colouring intricate mandala patterns is a proven way to relax, de-stress, and enhance your mindfulness. Lose yourself in the soothing process of bringing these beautiful designs to life, and experience the calming benefits for yourself.")
@@ -469,10 +469,10 @@ symmetry_lines = st.slider("Symmetry Lines", 2, 20, 8)
 mandela_component(color, brush_size, symmetry_lines)
 
 if st.session_state.get('color') != color:
-    components.html(f"""
-    <script>
+    components.html(f"""
+    <script>
         window.dispatchEvent(new MessageEvent('message', {{data: {{type: 'color_update', color: '{color}'}}}}));
         console.log("message dispatched to change color to: ", '{color}');
-    </script>
+    </script>
     """, height = 0)
     st.session_state['color'] = color
