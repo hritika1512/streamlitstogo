@@ -9,6 +9,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
 
+'''
 st.set_page_config(page_title="SynapseAI", page_icon="logo.ico", layout="wide")
 
 st.markdown(
@@ -355,6 +356,7 @@ if st.button("Get Advice"):
         st.write("Please provide a description of your conflict.")
     else:
         st.write("No advice available for the provided scenario.")
+'''
 
 def mandela_component(color, brush_size, symmetry_lines):
     html_string = f"""
