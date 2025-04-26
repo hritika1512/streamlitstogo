@@ -347,177 +347,137 @@ if st.button("Get Advice"):
     else:
         st.write("No advice available for the provided scenario.")
 
-def mandela_component(color, brush_size, symmetry_lines, existing_lines):
-    print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
-    html_string = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <script src="https://unpkg.com/konva@8/konva.min.js"></script>
-        <style>
-            #container {{
-                background-color: white;
-                width: 500px;
-                height: 500px;
-            }}
-            canvas {{
-                border: 5px solid black;
-            }}
-        </style>
-    </head>
-    <body>
-        <div id="container"></div>
-        <button id="clearButton">Clear</button>
-        <script>
-            const stage = new Konva.Stage({{
-                container: 'container',
-                width: 500,
-                height: 500,
-            }});
-            const layer = new Konva.Layer();
-            stage.add(layer);
+def mandela_component(color, brush_size, symmetry_lines):
 
-            let isDrawing = false;
-            let strokeColor = '{color}';
-            let strokeWidth = {brush_size};
-            let symmetryLines = {symmetry_lines};
-            let lastDrawTime = 0;
-            let currentLine;
-            let drawnLines = {existing_lines}; // Receive existing lines
+    print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
 
-            // Redraw existing lines
-            drawnLines.forEach(lineData => {
-                const line = new Konva.Line(lineData);
-                layer.add(line);
-            });
-            layer.draw();
+    html_string = f"""
 
-            stage.on('mousedown touchstart', (e) => {{
-                isDrawing = true;
-                const pos = stage.getPointerPosition();
-                const newLine = new Konva.Line({{
-                    points: [pos.x, pos.y],
-                    stroke: strokeColor,
-                    strokeWidth: strokeWidth,
-                    lineCap: 'round',
-                    lineJoin: 'round',
-                    name: 'userLine',
-                    // Store drawing parameters for saving
-                    stroke: strokeColor,
-                    strokeWidth: strokeWidth,
-                }});
-                layer.add(newLine);
-                currentLine = newLine;
-            }});
+    <!DOCTYPE html>
+    <html>
+    <head>
 
-            stage.on('mousemove touchmove', (e) => {{
-                if (!isDrawing) return;
-                const currentTime = Date.now();
-                if (currentTime - lastDrawTime < 16) return;
-                lastDrawTime = currentTime;
+        <script src="https://unpkg.com/konva@8/konva.min.js"></script>
+        <style>
+            #container {{
+                background-color: white;
+                width: 500px;
+                height: 500px;
+            }}
+            canvas {{
+                border: 5px solid black;
+            }}
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <button id="clearButton">Clear</button>
+        <script>
+            const stage = new Konva.Stage({{
+                container: 'container',
+                width: 500,
+                height: 500,
+            }});
+            const layer = new Konva.Layer();
+            stage.add(layer);
 
-                const pos = stage.getPointerPosition();
-                const newPoints = currentLine.points().concat([pos.x, pos.y]);
-                currentLine.points(newPoints);
+            let isDrawing = false;
+            let strokeColor = '{color}';
+            let strokeWidth = {brush_size};
+            let symmetryLines = {symmetry_lines};
+            let lastDrawTime = 0;
 
-                const centerX = stage.width() / 2;
-                const centerY = stage.height() / 2;
-                const angle = (2 * Math.PI) / symmetryLines;
+            stage.on('mousedown touchstart', (e) => {{
+                isDrawing = true;
+                const pos = stage.getPointerPosition();
+                const newLine = new Konva.Line({{
+                    points: [pos.x, pos.y],
+                    stroke: strokeColor,
+                    strokeWidth: strokeWidth,
+                    lineCap: 'round',
+                    lineJoin: 'round',
+                    name: 'userLine'
+                }});
+                layer.add(newLine);
+                currentLine = newLine;
+            }});
 
-                layer.getChildren((node) => node.name() === 'symmetryLine' && node.userLineRef === currentLine).forEach((node) => node.destroy());
+            stage.on('mousemove touchmove', (e) => {{
+                if (!isDrawing) return;
+                const currentTime = Date.now();
+                if (currentTime - lastDrawTime < 16) return;
+                lastDrawTime = currentTime;
 
-                for (let i = 1; i < symmetryLines; i++) {{
-                    const rotatedPoints = [];
-                    for (let j = 0; j < newPoints.length; j += 2) {{
-                        const dx = newPoints[j] - centerX;
-                        const dy = newPoints[j + 1] - centerY;
-                        const rotatedX = dx * Math.cos(angle * i) - dy * Math.sin(angle * i) + centerX;
-                        const rotatedY = dx * Math.sin(angle * i) + dy * Math.cos(angle * i) + centerY;
-                        rotatedPoints.push(rotatedX, rotatedY);
-                    }}
-                    const symmetryLine = new Konva.Line({{
-                        points: rotatedPoints,
-                        stroke: strokeColor,
-                        strokeWidth: strokeWidth,
-                        lineCap: 'round',
-                        lineJoin: 'round',
-                        name: 'symmetryLine',
-                        userLineRef: currentLine,
-                    }});
-                    layer.add(symmetryLine);
-                }}
-                layer.batchDraw();
-            }});
+                const pos = stage.getPointerPosition();
+                const newPoints = currentLine.points().concat([pos.x, pos.y]);
+                currentLine.points(newPoints);
 
-            stage.on('mouseup touchend', () => {{
-                isDrawing = false;
-                if (currentLine) {{
-                    // Store the drawn line data
-                    drawnLines.push(currentLine.toObject());
-                }}
-            }});
+                const centerX = stage.width() / 2;
+                const centerY = stage.height() / 2;
+                const angle = (2 * Math.PI) / symmetryLines;
 
-            document.getElementById('clearButton').addEventListener('click', function() {{
-                layer.getChildren((node) => node.name() === 'userLine' || node.name() === 'symmetryLine').forEach((node) => node.destroy());
-                drawnLines = []; // Clear stored lines
-                layer.draw();
-            }});
+                layer.getChildren((node) => node.name() === 'symmetryLine' && node.userLineRef === currentLine).forEach((node) => node.destroy());
 
-            window.addEventListener('message', function(event) {{
-                if (event.data.type === 'color_update') {{
-                    strokeColor = event.data.color;
-                    console.log("Color updated to: ", strokeColor);
-                }} else if (event.data.type === 'brush_update') {{
-                    strokeWidth = event.data.brushSize;
-                    console.log("Brush size updated to: ", strokeWidth);
-                }} else if (event.data.type === 'symmetry_update') {{
-                    symmetryLines = event.data.symmetryLines;
-                    console.log("Symmetry lines updated to: ", symmetryLines);
-                }}
-            }});
-            console.log("Initial color: ", strokeColor);
+                for (let i = 1; i < symmetryLines; i++) {{
+                    const rotatedPoints = [];
+                    for (let j = 0; j < newPoints.length; j += 2) {{
+                        const dx = newPoints[j] - centerX;
+                        const dy = newPoints[j + 1] - centerY;
+                        const rotatedX = dx * Math.cos(angle * i) - dy * Math.sin(angle * i) + centerX;
+                        const rotatedY = dx * Math.sin(angle * i) + dy * Math.cos(angle * i) + centerY;
+                        rotatedPoints.push(rotatedX, rotatedY);
+                    }}
+                    const symmetryLine = new Konva.Line({{
+                        points: rotatedPoints,
+                        stroke: strokeColor,
+                        strokeWidth: strokeWidth,
+                        lineCap: 'round',
+                        lineJoin: 'round',
+                        name: 'symmetryLine',
+                        userLineRef: currentLine,
+                    }});
+                    layer.add(symmetryLine);
+                }}
+                layer.batchDraw();
+            }});
 
-        </script>
-    </body>
-    </html>
-    """
-    components.html(html_string, height=550)
+            stage.on('mouseup touchend', () => {{
+                isDrawing = false;
+            }});
+
+            document.getElementById('clearButton').addEventListener('click', function() {{
+                layer.getChildren((node) => node.name() === 'userLine' || node.name() === 'symmetryLine').forEach((node) => node.destroy());
+                layer.draw();
+            }});
+
+            window.addEventListener('message', function(event) {{
+                if (event.data.type === 'color_update') {{
+                    strokeColor = event.data.color;
+                    console.log("Color updated to: ", strokeColor);
+                }}
+            }});
+            console.log("Initial color: ", strokeColor);
+
+        </script>
+    </body>
+    </html>
+    """
+    components.html(html_string, height=550)
 
 st.title("Mandala Drawing App")
 st.write("Unleash your creativity and find your focus with our Mandala Colouring Feature! Colouring intricate mandala patterns is a proven way to relax, de-stress, and enhance your mindfulness. Lose yourself in the soothing process of bringing these beautiful designs to life, and experience the calming benefits for yourself.")
 
-if 'drawn_lines' not in st.session_state:
-    st.session_state['drawn_lines'] = []
+color = st.color_picker("Choose Color", "#000000")
+brush_size = st.slider("Brush Size", 1, 10, 2)
+symmetry_lines = st.slider("Symmetry Lines", 2, 20, 8)
 
-color = st.color_picker("Choose Color", st.session_state.get('color', "#000000"))
-brush_size = st.slider("Brush Size", 1, 10, st.session_state.get('brush_size', 2))
-symmetry_lines = st.slider("Symmetry Lines", 2, 20, st.session_state.get('symmetry_lines', 8))
-
-mandela_component(color, brush_size, symmetry_lines, st.session_state['drawn_lines'])
+mandela_component(color, brush_size, symmetry_lines)
 
 if st.session_state.get('color') != color:
-    components.html(f"""
-    <script>
-        window.dispatchEvent(new MessageEvent('message', {{data: {{type: 'color_update', color: '{color}'}}}}));
-        console.log("message dispatched to change color to: ", '{color}');
-    </script>
-    """, height = 0)
-    st.session_state['color'] = color
-
-if st.session_state.get('brush_size') != brush_size:
-    components.html(f"""
-    <script>
-        window.dispatchEvent(new MessageEvent('message', {{data: {{type: 'brush_update', brushSize: {brush_size}}}}}));
-        console.log("message dispatched to change brush size to: ", {brush_size});
-    </script>
-    """, height = 0)
-    st.session_state['brush_size'] = brush_size
-
-if st.session_state.get('symmetry_lines') != symmetry_lines:
-    components.html(f"""
-    <script>
-        window.dispatchEvent(new MessageEvent('message', {{data: {{type: 'symmetry_update', symmetryLines: {symmetry_lines}}}}}));
-        console.log("message dispatched to change symmetry lines to: ", {symmetry_lines});
-    </script>
-    """, height = 0)
-    st.session_state['symmetry_lines'] = symmetry_lines
+    components.html(f"""
+    <script>
+        window.dispatchEvent(new MessageEvent('message', {{data: {{type: 'color_update', color: '{color}'}}}}));
+        console.log("message dispatched to change color to: ", '{color}');
+    </script>
+    """, height = 0)
+    st.session_state['color'] = color
