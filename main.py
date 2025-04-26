@@ -365,7 +365,7 @@ def mandela_component(color, brush_size, symmetry_lines):
         <script src="https://unpkg.com/konva@8/konva.min.js"></script>
         <style>
             #container {{
-                background-color: white !important;
+                background-color: #ffffff !important;
                 width: 500px !important;
                 height: 500px !important;
             }}
