@@ -9,6 +9,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
 
+st.set_page_config(page_title="SynapseAI", page_icon="⭐", layout="wide")
+
 st.markdown(
     """
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,8 +19,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
-st.set_page_config(page_title="SynapseAI", page_icon="⭐", layout="wide")
 
 API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN")
 API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-2-7b-chat-hf"
