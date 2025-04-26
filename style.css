@@ -1,4 +1,4 @@
-.appview-container {
+/* .appview-container {
   background: linear-gradient(to right, #bcd1fb, #716bc6); 
   color: #001f3f !important;
 }
@@ -6,7 +6,7 @@
 .my-element {
   border: 1px solid #000000;
   border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .stButton>button {
@@ -29,6 +29,6 @@
 
 .stButton>button:hover span { 
   color: black !important; 
-}
+} */
 
 
