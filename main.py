@@ -355,6 +355,7 @@ if st.button("Get Advice"):
         st.write("Please provide a description of your conflict.")
     else:
         st.write("No advice available for the provided scenario.")
+
 def mandela_component(color, brush_size, symmetry_lines):
     print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
     html_string = f"""
@@ -364,12 +365,12 @@ def mandela_component(color, brush_size, symmetry_lines):
         <script src="https://unpkg.com/konva@8/konva.min.js"></script>
         <style>
             #container {{
-                background-color: white;
-                width: 500px;
-                height: 500px;
+                background-color: white !important;
+                width: 500px !important;
+                height: 500px !important;
             }}
             canvas {{
-                border: 5px solid black;
+                border: 4px solid black !important;
             }}
         </style>
     </head>
