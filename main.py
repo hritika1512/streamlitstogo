@@ -360,24 +360,20 @@ def mandela_component(color, brush_size, symmetry_lines):
     print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
     html_string = f"""
     <!DOCTYPE html>
-    <html>
-    <head>
-        <script src="https://unpkg.com/konva@8/konva.min.js"></script>
+    <html>
+    <head>
+        <script src="https://unpkg.com/konva@8/konva.min.js"></script>
         <style>
-    #container {
-        background-color: white !important;
-    }
-    body {
-        width: 500px !important;
-    }
-    body {
-        height: 500px !important;
-    }
-    canvas {
-        border: 4px solid black !important;
-    }
+            #container {{
+                background-color: white !important;
+                width: 500px !important;
+                height: 500px !important;
+            }}
+            canvas {{
+                border: 4px solid black !important;
+            }}
         </style>
-    </head>
+    </head>
     <body>
         <div id="container"></div>
         <button id="clearButton">Clear</button>
