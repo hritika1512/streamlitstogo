@@ -386,6 +386,7 @@ def mandela_component(color, brush_size, symmetry_lines):
             }});
             const layer = new Konva.Layer();
             stage.add(layer);
+            stage.draw();
 
             let isDrawing = false;
             let strokeColor = '{color}';
