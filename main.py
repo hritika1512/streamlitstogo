@@ -366,7 +366,11 @@ def mandela_component(color, brush_size, symmetry_lines):
         <style>
     #container {
         background-color: white !important;
+    }
+    body {
         width: 500px !important;
+    }
+    body {
         height: 500px !important;
     }
     canvas {
