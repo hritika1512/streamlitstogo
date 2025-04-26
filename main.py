@@ -386,8 +386,16 @@ def mandela_component(color, brush_size, symmetry_lines):
             const layer = new Konva.Layer();
             stage.add(layer);
 
-            const konvaCanvas = stage.getCanvas()._canvas;
-            konvaCanvas.style.background = 'white';
+            const background = new Konva.Rect({
+                x: 0,
+                y: 0,
+                width: stage.width(),
+                height: stage.height(),
+                fill: 'white',
+                listening: false, // So that mouse clicks pass through
+            });
+            layer.add(background); // Add background first, so it stays behind other drawings
+
 
             let isDrawing = false;
             let strokeColor = '{color}';
