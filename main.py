@@ -359,29 +359,27 @@ if st.button("Get Advice"):
 def mandela_component(color, brush_size, symmetry_lines):
     print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
     html_string = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <script src="https://unpkg.com/konva@8/konva.min.js"></script>
-        <style>
-            #container {{
-                width: 500px !important;
-                height: 500px !important;
-            }}
-            canvas {{
-                border: 4px solid black !important;
-            }}
-        </style>
-    </head>
-    <body>
-        <div id="container"></div>
-        <button id="clearButton">Clear</button>
-        <script>
-            const stage = new Konva.Stage({{
-                container: 'container',
-                width: 500,
-                height: 500,
-                backgroundColor: '#fefefe'
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/konva@8/konva.min.js"></script>
+    <link rel="stylesheet" href="mandala.css">
+</head>
+<body>
+    <div id="container"></div>
+    <button id="clearButton">Clear</button>
+    <script>
+        const stage = new Konva.Stage({{
+            container: 'container',
+            width: 500,
+            height: 500,
+            backgroundColor: '#fefefe'
+        }});
+        const layer = new Konva.Layer();
+        stage.add(layer);
+        const konvaCanvas = stage.getCanvas()._canvas;
+        konvaCanvas.style.backgroundColor = '#fefefe';
+
             }});
             const layer = new Konva.Layer();
             const konvaCanvas = stage.getCanvas()._canvas;
