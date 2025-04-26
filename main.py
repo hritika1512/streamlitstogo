@@ -14,14 +14,6 @@ st.markdown(
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comic+Relief&display=swap" rel="stylesheet">
-    <style>
-    body {
-        font-family: 'Comic Relief', cursive !important;
-    }
-    h1, h2, h3, p, div, span, a {
-        font-family: 'Comic Relief', cursive !important;
-    }
-    </style>
     """,
     unsafe_allow_html=True,
 )
