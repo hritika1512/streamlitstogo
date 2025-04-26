@@ -383,11 +383,13 @@ def mandela_component(color, brush_size, symmetry_lines):
                 width: 500, // Set fixed width
                 height: 500, // Set fixed height
             }});
-            const layer = new Konva.Layer();
-            stage.add(layer);
+            setTimeout(() => {
+            const konvaCanvas = stage.getCanvas()._canvas;
+            konvaCanvas.style.background = 'white';
+            }, 10); // Wait for 10 milliseconds
             
             const konvaCanvas = stage.getCanvas()._canvas;
-            konvaCanvas.style.backgroundColor = 'white';
+            konvaCanvas.style.background = 'white';
             
             let isDrawing = false;
             let strokeColor = '{color}';
