@@ -346,17 +346,12 @@ if st.button("Get Advice"):
         st.write("Please provide a description of your conflict.")
     else:
         st.write("No advice available for the provided scenario.")
-
 def mandela_component(color, brush_size, symmetry_lines):
-
     print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
-
-    html_string = f"""
-
+    html_string = f"""
     <!DOCTYPE html>
     <html>
     <head>
-
         <script src="https://unpkg.com/konva@8/konva.min.js"></script>
         <style>
             #container {{
