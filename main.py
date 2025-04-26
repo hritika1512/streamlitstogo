@@ -378,24 +378,23 @@ def mandela_component(color, brush_size, symmetry_lines):
         <div id="container"></div>
         <button id="clearButton">Clear</button>
         <script>
-            const stage = new Konva.Stage({{
+            const stage = new Konva.Stage({
                 container: 'container',
-                width: 500, // Set fixed width
-                height: 500, // Set fixed height
-            }});
-            setTimeout(() => {
+                width: 500,
+                height: 500,
+            });
+            const layer = new Konva.Layer();
+            stage.add(layer);
+
             const konvaCanvas = stage.getCanvas()._canvas;
             konvaCanvas.style.background = 'white';
-            }, 10); // Wait for 10 milliseconds
-            
-            const konvaCanvas = stage.getCanvas()._canvas;
-            konvaCanvas.style.background = 'white';
-            
+
             let isDrawing = false;
             let strokeColor = '{color}';
             let strokeWidth = {brush_size};
-            let symmetryLines = {symmetry_lines};
+            let symmetryLines = '{symmetry_lines}'; // Ensure this is treated as a number
             let lastDrawTime = 0;
+            let currentLine;
 
             stage.on('mousedown touchstart', (e) => {{
                 isDrawing = true;
