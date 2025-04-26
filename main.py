@@ -349,7 +349,7 @@ if st.button("Get Advice"):
 
 def mandela_component(color, brush_size, symmetry_lines):
 
-    print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
+    print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
 
     html_string = f"""
 
