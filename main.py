@@ -356,6 +356,9 @@ if st.button("Get Advice"):
     else:
         st.write("No advice available for the provided scenario.")
 
+import streamlit as st
+import streamlit.components.v1 as components
+
 def mandela_component(color, brush_size, symmetry_lines):
     print(f"Color: {color}, Brush Size: {brush_size}, Symmetry Lines: {symmetry_lines}")
     html_string = f"""
@@ -365,12 +368,11 @@ def mandela_component(color, brush_size, symmetry_lines):
         <script src="https://unpkg.com/konva@8/konva.min.js"></script>
         <style>
             #container {{
-                background-color: #ffffff;
-                width: 500px; /* Set fixed width */
-                height: 500px; /* Set fixed height */
+                width: 500px !important;
+                height: 500px !important;
             }}
             canvas {{
-                border: 1px solid black;
+                border: 4px solid black !important;
             }}
         </style>
     </head>
@@ -378,36 +380,36 @@ def mandela_component(color, brush_size, symmetry_lines):
         <div id="container"></div>
         <button id="clearButton">Clear</button>
         <script>
-            const stage = new Konva.Stage({
+            const stage = new Konva.Stage({{ // Escaped curly braces
                 container: 'container',
                 width: 500,
                 height: 500,
-            });
+            }});
             const layer = new Konva.Layer();
             stage.add(layer);
 
-            const background = new Konva.Rect({
+            // Create a white background rectangle
+            const background = new Konva.Rect({{ // Escaped curly braces
                 x: 0,
                 y: 0,
                 width: stage.width(),
                 height: stage.height(),
                 fill: 'white',
-                listening: false, // So that mouse clicks pass through
-            });
-            layer.add(background); // Add background first, so it stays behind other drawings
-
+                listening: false, // Prevent background from capturing mouse events
+            }});
+            layer.add(background);
 
             let isDrawing = false;
             let strokeColor = '{color}';
-            let strokeWidth = {brush_size};
-            let symmetryLines = '{symmetry_lines}'; // Ensure this is treated as a number
+            let strokeWidth = '{brush_size}';
+            let symmetryLines = parseInt('{symmetry_lines}', 10);
             let lastDrawTime = 0;
             let currentLine;
 
-            stage.on('mousedown touchstart', (e) => {{
+            stage.on('mousedown touchstart', (e) => {{ // Escaped curly braces
                 isDrawing = true;
                 const pos = stage.getPointerPosition();
-                const newLine = new Konva.Line({{
+                const newLine = new Konva.Line({{ // Escaped curly braces
                     points: [pos.x, pos.y],
                     stroke: strokeColor,
                     strokeWidth: strokeWidth,
@@ -419,7 +421,7 @@ def mandela_component(color, brush_size, symmetry_lines):
                 currentLine = newLine;
             }});
 
-            stage.on('mousemove touchmove', (e) => {{
+            stage.on('mousemove touchmove', (e) => {{ // Escaped curly braces
                 if (!isDrawing) return;
                 const currentTime = Date.now();
                 if (currentTime - lastDrawTime < 16) return;
@@ -435,16 +437,16 @@ def mandela_component(color, brush_size, symmetry_lines):
 
                 layer.getChildren((node) => node.name() === 'symmetryLine' && node.userLineRef === currentLine).forEach((node) => node.destroy());
 
-                for (let i = 1; i < symmetryLines; i++) {{
+                for (let i = 1; i < symmetryLines; i++) {{ // Escaped curly braces
                     const rotatedPoints = [];
-                    for (let j = 0; j < newPoints.length; j += 2) {{
+                    for (let j = 0; j < newPoints.length; j += 2) {{ // Escaped curly braces
                         const dx = newPoints[j] - centerX;
                         const dy = newPoints[j + 1] - centerY;
                         const rotatedX = dx * Math.cos(angle * i) - dy * Math.sin(angle * i) + centerX;
                         const rotatedY = dx * Math.sin(angle * i) + dy * Math.cos(angle * i) + centerY;
                         rotatedPoints.push(rotatedX, rotatedY);
                     }}
-                    const symmetryLine = new Konva.Line({{
+                    const symmetryLine = new Konva.Line({{ // Escaped curly braces
                         points: rotatedPoints,
                         stroke: strokeColor,
                         strokeWidth: strokeWidth,
@@ -458,17 +460,17 @@ def mandela_component(color, brush_size, symmetry_lines):
                 layer.batchDraw();
             }});
 
-            stage.on('mouseup touchend', () => {{
+            stage.on('mouseup touchend', () => {{ // Escaped curly braces
                 isDrawing = false;
             }});
 
-            document.getElementById('clearButton').addEventListener('click', function() {{
+            document.getElementById('clearButton').addEventListener('click', function() {{ // Escaped curly braces
                 layer.getChildren((node) => node.name() === 'userLine' || node.name() === 'symmetryLine').forEach((node) => node.destroy());
                 layer.draw();
             }});
 
-            window.addEventListener('message', function(event) {{
-                if (event.data.type === 'color_update') {{
+            window.addEventListener('message', function(event) {{ // Escaped curly braces
+                if (event.data.type === 'color_update') {{ // Escaped curly braces
                     strokeColor = event.data.color;
                     console.log("Color updated to: ", strokeColor);
                 }}
@@ -479,7 +481,7 @@ def mandela_component(color, brush_size, symmetry_lines):
     </body>
     </html>
     """
-    components.html(html_string) # Removed the height parameter
+    components.html(html_string, width=600, height=600) # Added width and height for better visibility
 
 st.title("Mandala Drawing App")
 
@@ -495,5 +497,5 @@ if st.session_state.get('color') != color:
         window.dispatchEvent(new MessageEvent('message', {{data: {{type: 'color_update', color: '{color}'}}}}));
         console.log("message dispatched to change color to: ", '{color}');
     </script>
-    """, height = 0)
+    """, height=0)
     st.session_state['color'] = color
