@@ -382,6 +382,7 @@ def mandela_component(color, brush_size, symmetry_lines):
                 container: 'container',
                 width: 500,
                 height: 500,
+                backgroundColor: 'white'
             }});
             const layer = new Konva.Layer();
             stage.add(layer);
