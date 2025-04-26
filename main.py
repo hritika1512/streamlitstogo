@@ -475,4 +475,4 @@ if st.session_state.get('color') != color:
         console.log("message dispatched to change color to: ", '{color}');
     </script>
     """, height = 0)
-    st.session_state['color'] = color
+st.session_state['color'] = color
