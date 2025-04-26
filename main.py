@@ -363,16 +363,16 @@ def mandela_component(color, brush_size, symmetry_lines):
     <html>
     <head>
         <script src="https://unpkg.com/konva@8/konva.min.js"></script>
-        <style>
-            #container {{
-                background-color: white !important;
-                width: 500px !important;
-                height: 500px !important;
-            }}
-            canvas {{
-                border: 4px solid black !important;
-            }}
-        </style>
+        <style>
+    #container {
+        background-color: white !important;
+        width: 500px !important;
+        height: 500px !important;
+    }
+    canvas {
+        border: 4px solid black !important;
+    }
+        </style>
     </head>
     <body>
         <div id="container"></div>
