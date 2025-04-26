@@ -31,15 +31,15 @@
   color: black !important; 
 }
 
+
+
 body {
-  font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; 
 }
 
 h1 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700; 
-}
+    font-family: 'Comic Relief', cursive;
 
-p {
-  font-family: Verdana, sans-serif;
+.comic-text {
+    font-family: 'Comic Relief', cursive;
 }
