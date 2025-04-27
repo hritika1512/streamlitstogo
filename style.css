@@ -35,5 +35,24 @@
   color: black !important;
 }
 
+body {
+    font-family: 'Comic Relief', cursive !important;
+
+h1 {
+    font-family: 'Comic Relief', cursive !important;
+}
+
+h3 {
+    font-family: 'Comic Relief', cursive !important;
+}
+
+p {
+    font-family: 'Tahoma', sans-serif !important;
+}
+
+.comic-text {
+    font-family: 'Comic Relief', cursive !important;
+}
+
 
 
