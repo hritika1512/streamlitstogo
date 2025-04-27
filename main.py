@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
 
-st.set_page_config(page_title="SynapseAI", page_icon="logo.ico", layout="wide")
+st.set_page_config(page_title="SynapseAI", page_icon="newlogo.ico", layout="wide")
 
 st.markdown(
     """
