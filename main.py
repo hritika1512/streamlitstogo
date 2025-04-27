@@ -97,7 +97,7 @@ challenges = {
 }
 
 st.image("banner.png", width=541)
-st.title("SynapseAI: *Wellbeing for Students, by Students.*")
+st.title("SynapseI: *Wellbeing for Students, by Students.*")
 st.image("kindness.png", caption="Spreading Kindness 💖", width=100)
 st.write("In today's fast-paced world, students face numerous challenges to their wellbeing, including work overload, social tensions, and the pressures of academic life. That's why we developed SynapseAI, a platform designed specifically for students. Here you'll find AI-powered conflict resolution support, journaling prompts for self-reflection, mindfulness tips and kindness challenges to help you find your calm and peace of mind in your everyday life.")
 if "completed_tasks" not in st.session_state:
