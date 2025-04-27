@@ -366,10 +366,9 @@ def mandela_component(color, brush_size, symmetry_lines):
             #container {{
                 width: 500px !important;
                 height: 500px !important;
-                border: 1px solid blue !important; /* Force a border to see the container */
             }}
             canvas {{
-                border: 1px solid black !important; /* Force a border on the canvas */
+                border: 1px solid blue !important; /* Force a border on the canvas */
             }}
             body {{
                 margin: 0 !important; /* Reset body margin in iframe */
