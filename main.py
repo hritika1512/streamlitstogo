@@ -482,7 +482,7 @@ def mandela_component(color, brush_size, symmetry_lines):
     """
     components.html(html_string, width=600, height=600)
 
-st.title("Mandala Drawing Debug")
+st.title("Mandala Magic")
 
 color = st.color_picker("Choose Color", "#000000")
 brush_size = st.slider("Brush Size", 1, 10, 2)
